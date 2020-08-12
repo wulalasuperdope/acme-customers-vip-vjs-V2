@@ -1,0 +1,76 @@
+<html>
+  <head>
+  </head>
+  <body>
+    <form id='formCustomer'>
+      <input name='name' placeholder='name'/>
+      <input name='email' placeholder='email'/>
+      <input name='VIP' type='checkbox' />
+      <button>Add</button>
+    </form>
+
+    <ul id='customerList'>
+    </ul>
+  <script>
+     const list = document.querySelector('#customerList');
+     const inputName = document.querySelector('[name="name"]');
+     const inputEmail = document.querySelector('[name="email"]');
+     const formCustomer = document.querySelector('#formCustomer');
+     const inputVIP = document.querySelector('[name="VIP"]');
+
+
+     let customers = [
+      { id: 1, name: 'moe', email: 'moe@gmail.com', isVIP: true},
+      { id: 2, name: 'larry', isVIP: true, email: 'larry@gmail.com'},
+      { id: 4, name: 'shep', email: 'shep@gmail.com'},
+     ];
+
+    formCustomer.addEventListener('submit', (ev)=> {
+      ev.preventDefault();
+      customers.push({
+        name: inputName.value,
+        email: inputEmail.value,
+        isVIP: inputVIP.checked
+
+      });
+      inputName.value = '';
+      inputEmail.value = '';
+      inputVIP.checked = false;
+      render();
+    });
+
+    list.addEventListener('click', (ev)=> {
+      if(ev.target.tagName === 'BUTTON'){
+        const listItem = ev.target.parentNode;
+        const idx = [...list.children].indexOf(listItem);
+        customers = customers.filter((customer, _idx)=> {
+          return _idx !== idx;
+        });
+        render();
+      }
+
+    });
+
+    const render = ()=> {
+      const html = customers.map( customer => {
+        return `
+          <li>
+            ${
+              customer.name
+            }
+            ${
+              customer.email
+            }
+            ${
+              customer.isVIP
+            }
+            <button>Delete</button>
+          </li>
+        `;
+      }).join('');
+      list.innerHTML = html;
+    }
+    render();
+  </script>
+  </body>
+</html>
