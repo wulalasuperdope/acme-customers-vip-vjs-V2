@@ -13,7 +13,17 @@ span {
 }
 .input-row {
   margin-bottom: 10px;
+  display: flex;
 }
+
+.input-row label {
+  flex: 1;
+}
+
+.input-row input {
+  flex: 2;
+}
+
 .VIP-status {
   background-color: grey;
   color: white;
@@ -23,9 +33,33 @@ span {
 .customer {
   margin-bottom: 10px;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
 }
 .customervip {
   margin-bottom: 10px;
   padding: 20px;
   background-color: rgb(104, 231, 104);
+  display: flex;
+  justify-content: space-between;
+}
+
+#addButton {
+  padding: 5px 20px;
+}
+
+.destroy {
+  padding: 5px 40px;
+}
+
+@media (max-width: 800px) {
+  .input-row {
+    flex-direction: column;
+  }
+  .customer {
+    flex-direction: column;
+  }
+  .customervip {
+    flex-direction: column;
+  }
 }

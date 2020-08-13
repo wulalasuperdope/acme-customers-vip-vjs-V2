@@ -10,7 +10,28 @@ const customerForm = document.querySelector('.form-container');
 const nameInput = document.querySelector('#name');
 const emailInput = document.querySelector('#email');
 const isVIPInput = document.querySelector('#isVIP');
-// const nameInput = docuemnt.querySelector('#name');
+
+const addButton = document.querySelector('#addButton');
+
+const checkValidity = () => {
+  if (
+    nameInput.value &&
+    emailInput.value &&
+    emailInput.value.indexOf('@') !== -1
+  ) {
+    addButton.removeAttribute('disabled');
+  } else {
+    addButton.setAttribute('disabled', 'disabled');
+  }
+};
+
+nameInput.addEventListener('keyup', (ev) => {
+  checkValidity();
+});
+
+emailInput.addEventListener('keyup', (ev) => {
+  checkValidity();
+});
 
 customerForm.addEventListener('submit', (ev) => {
   ev.preventDefault();
@@ -23,6 +44,7 @@ customerForm.addEventListener('submit', (ev) => {
   nameInput.value = '';
   emailInput.value = '';
   isVIPInput.checked = false;
+  checkValidity();
   render();
 });
 
